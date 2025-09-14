@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exercise_id: MyString
+  title: MyString
+  description: MyText
+  difficulty: MyString
+  category: MyString
+  instructions: MyText
+  starter_code: 
+
+two:
+  exercise_id: MyString
+  title: MyString
+  description: MyText
+  difficulty: MyString
+  category: MyString
+  instructions: MyText
+  starter_code: 
