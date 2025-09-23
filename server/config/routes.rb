@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   namespace :api do
-    resources :exercises, param: :exercise_id, only: [:index, :show]
+    resources :exercises, param: :exercise_id, only: [:index, :show] do
+      collection do
+        post :run
+      end
+    end
   end
 end
