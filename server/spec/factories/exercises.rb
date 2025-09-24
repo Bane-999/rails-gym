@@ -48,5 +48,49 @@ FactoryBot.define do
         }
       end
     end
+
+    factory :exercise_user_validation do
+      exercise_id  { "001_user_validation" }
+      title        { "Add Email Presence Validation" }
+      difficulty   { "beginner" }
+      category     { "validations" }
+      description  { "Learn how to protect your database from bad data." }
+      instructions { "Add a presence validation for the email attribute." }
+      starter_code do
+        {
+          "app/models/user.rb" => "class User < ApplicationRecord\n  # Add your validation here\n\nend\n"
+        }
+      end
+    end
+
+    factory :exercise_add_email_column do
+      exercise_id  { "002_add_email_column" }
+      title        { "Add Email Column to Users Table" }
+      difficulty   { "beginner" }
+      category     { "migrations" }
+      description  { "Practice writing a Rails migration." }
+      instructions { "Add an email column to the users table." }
+      starter_code do
+        {
+          "db/migrate/20240101000001_add_email_to_users.rb" =>
+            "class AddEmailToUsers < ActiveRecord::Migration[7.1]\n  def change\n  end\nend\n"
+        }
+      end
+    end
+
+    factory :exercise_user_posts_association do
+      exercise_id  { "003_user_posts_association" }
+      title        { "User has_many Posts" }
+      difficulty   { "intermediate" }
+      category     { "associations" }
+      description  { "Set up a one-to-many relationship between User and Post." }
+      instructions { "Add has_many :posts to User and belongs_to :user to Post." }
+      starter_code do
+        {
+          "app/models/user.rb" => "class User < ApplicationRecord\n  # Add your association here\n\nend\n",
+          "app/models/post.rb" => "class Post < ApplicationRecord\n  # Add your association here\n\nend\n"
+        }
+      end
+    end
   end
 end
