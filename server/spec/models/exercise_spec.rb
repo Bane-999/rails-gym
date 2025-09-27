@@ -110,5 +110,4 @@ RSpec.describe Exercise, type: :model do
       )
     end
   end
-
 end

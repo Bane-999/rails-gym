@@ -1,5 +1,4 @@
 class CodeRunnerService
-
   TIMEOUT_SECONDS = 30
 
   def initialize(exercise_id, files)

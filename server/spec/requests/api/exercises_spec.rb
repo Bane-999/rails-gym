@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Api::Exercises", type: :request do
-
   describe "GET /api/exercises" do
     context "when there are no exercises" do
       it "returns an empty array" do

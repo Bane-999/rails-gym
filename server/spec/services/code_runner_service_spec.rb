@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe CodeRunnerService do
-
   let(:exercise_id) { "001_user_validation" }
   let(:files) do
     {
@@ -263,5 +262,4 @@ RSpec.describe CodeRunnerService do
       end
     end
   end
-
 end

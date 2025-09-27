@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Database Seeds", type: :task do
-
   before(:all) do
     $stdout = StringIO.new
     load Rails.root.join("db/seeds.rb")
