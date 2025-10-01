@@ -1,0 +1,24 @@
+# sandbox/Gemfile
+#
+# Minimal Gemfile for the Rails Gym sandbox.
+# This project runs inside Docker — keep dependencies small and fast to install.
+
+source "https://rubygems.org"
+
+ruby "3.2.2"
+
+# ─── Rails (minimal) ──────────────────────────────────────────────────────────
+gem "rails",       "~> 8.0.5"
+
+# ─── Database ─────────────────────────────────────────────────────────────────
+# SQLite is perfect for the sandbox:
+#   - No separate database server needed
+#   - File-based — easy to create fresh for each run
+#   - Fast to set up and tear down
+gem "sqlite3",     "~> 2.1"
+
+# ─── Testing ──────────────────────────────────────────────────────────────────
+gem "rspec-rails",       "~> 6.1"
+gem "shoulda-matchers",  "~> 6.0"
+gem "factory_bot_rails", "~> 6.4"
+gem "faker",             "~> 3.2"

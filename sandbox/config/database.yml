@@ -1,0 +1,21 @@
+# sandbox/config/database.yml
+#
+# We use SQLite because:
+#   1. No separate database server needed inside Docker
+#   2. Fast to create from scratch on every run
+#   3. The database file lives in tmp/ — always fresh
+
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+# This is the database RSpec uses.
+# It gets created fresh every time the container starts.
+test:
+  <<: *default
+  database: db/test.sqlite3
