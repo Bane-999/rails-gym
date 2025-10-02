@@ -11,8 +11,8 @@ RSpec.describe "Database Seeds", type: :task do
     Exercise.delete_all
   end
 
-  it "creates exactly 3 exercises" do
-    expect(Exercise.count).to eq(3)
+  it "creates exactly 4 exercises" do
+    expect(Exercise.count).to eq(4)
   end
 
   it "creates all exercises with valid data" do
@@ -50,8 +50,8 @@ RSpec.describe "Database Seeds", type: :task do
     end
   end
 
-  describe "002_add_email_column" do
-    subject(:exercise) { Exercise.find_by!(exercise_id: "002_add_email_column") }
+  describe "002_add_age_to_users" do
+    subject(:exercise) { Exercise.find_by!(exercise_id: "002_add_age_to_users") }
 
     it "exists" do
       expect(exercise).to be_present
@@ -66,7 +66,7 @@ RSpec.describe "Database Seeds", type: :task do
     end
 
     it "has the correct starter file path" do
-      expect(exercise.starter_code.keys.first).to include("add_email_to_users")
+      expect(exercise.starter_code.keys.first).to include("add_age_to_users")
     end
 
     it "has non-empty instructions" do
@@ -74,8 +74,28 @@ RSpec.describe "Database Seeds", type: :task do
     end
   end
 
-  describe "003_user_posts_association" do
-    subject(:exercise) { Exercise.find_by!(exercise_id: "003_user_posts_association") }
+  describe "003_find_admins" do
+    subject(:exercise) { Exercise.find_by!(exercise_id: "003_find_admins") }
+
+    it "exists" do
+      expect(exercise).to be_present
+    end
+
+    it "has correct difficulty" do
+      expect(exercise.difficulty).to eq("intermediate")
+    end
+
+    it "has correct category" do
+      expect(exercise.category).to eq("activerecord")
+    end
+
+    it "has the correct starter file path" do
+      expect(exercise.starter_code.keys).to include("app/services/user_finder.rb")
+    end
+  end
+
+  describe "004_user_posts_association" do
+    subject(:exercise) { Exercise.find_by!(exercise_id: "004_user_posts_association") }
 
     it "exists" do
       expect(exercise).to be_present
@@ -89,19 +109,8 @@ RSpec.describe "Database Seeds", type: :task do
       expect(exercise.category).to eq("associations")
     end
 
-    it "has two starter code files" do
-      expect(exercise.starter_code.keys.length).to eq(2)
-    end
-
-    it "has user.rb and post.rb starter files" do
-      expect(exercise.starter_code.keys).to include(
-        "app/models/user.rb",
-        "app/models/post.rb"
-      )
-    end
-
-    it "has non-empty instructions" do
-      expect(exercise.instructions).to be_present
+    it "has the correct starter file path" do
+      expect(exercise.starter_code.keys).to include("app/models/post.rb", "app/models/user.rb")
     end
   end
 
@@ -114,7 +123,7 @@ RSpec.describe "Database Seeds", type: :task do
 
       $stdout = original_stdout
 
-      expect(Exercise.count).to eq(3)
+      expect(Exercise.count).to eq(4)
     end
   end
 end

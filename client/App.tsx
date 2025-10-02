@@ -16,11 +16,11 @@ const App: React.FC = () => {
   const [view, setView] = useState<ViewState>('dashboard');
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
-  
+
   // Workspace State
   const [activePath, setActivePath] = useState<string>("");
   const [fileContents, setFileContents] = useState<Record<string, string>>({});
-  
+
   const [output, setOutput] = useState<string>("");
   const [isRunning, setIsRunning] = useState(false);
   const [lastPassed, setLastPassed] = useState<boolean | null>(null);
@@ -55,11 +55,11 @@ const App: React.FC = () => {
 
   const startExercise = (ex: Exercise) => {
     setCurrentExercise(ex);
-    
+
     // Initialize file contents map from exercise data
     setFileContents({ ...ex.files });
     setActivePath(ex.defaultOpenPath);
-    
+
     setOutput("");
     setLastPassed(null);
     setView('workspace');
@@ -77,7 +77,7 @@ const App: React.FC = () => {
       const currentIndex = categoryExercises.findIndex(e => e.id === ex.id);
       // Queue is everything after this one
       const remaining = categoryExercises.slice(currentIndex + 1);
-      
+
       setQueue(remaining);
       startExercise(ex);
   };
@@ -86,7 +86,7 @@ const App: React.FC = () => {
       // Pick random exercises
       const shuffled = [...EXERCISES].sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3); // Take 3 random ones
-      
+
       setQueue(selected.slice(1));
       setTimerSeconds(minutes * 60);
       setIsTimerActive(true);
@@ -130,7 +130,7 @@ const App: React.FC = () => {
     setLastPassed(null);
 
     try {
-      const result = await executeCode(currentExercise.id, fileContents);
+      const result = await executeCode(currentExercise.exercise_id, fileContents);
       setOutput(result.output);
       setLastPassed(result.passed);
     } catch (error) {
@@ -151,13 +151,13 @@ const App: React.FC = () => {
   const handleFileChange = (newContent: string | undefined) => {
       if (newContent === undefined) return;
       if (currentExercise?.readOnlyPaths.includes(activePath)) return;
-      
+
       setFileContents(prev => ({
           ...prev,
           [activePath]: newContent
       }));
   };
-  
+
   const isCurrentFileReadOnly = currentExercise?.readOnlyPaths.includes(activePath);
 
   // View Routing
@@ -168,9 +168,9 @@ const App: React.FC = () => {
   if (view === 'category_list' && selectedCategory) {
       const exercises = EXERCISES.filter(e => e.category === selectedCategory);
       return (
-          <CategoryDetail 
-            category={selectedCategory} 
-            exercises={exercises} 
+          <CategoryDetail
+            category={selectedCategory}
+            exercises={exercises}
             onSelect={handleSelectExerciseFromList}
             onBack={() => setView('dashboard')}
           />
@@ -181,31 +181,31 @@ const App: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-slate-950 text-slate-200 font-sans overflow-hidden">
-      
+
       {/* File Tree (Context) */}
       <div className="w-64 flex-shrink-0 h-full overflow-hidden">
-          <FileTree 
-            files={currentExercise.fileTree} 
-            activePath={activePath} 
-            onSelect={setActivePath} 
+          <FileTree
+            files={currentExercise.fileTree}
+            activePath={activePath}
+            onSelect={setActivePath}
           />
       </div>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        
+
         {/* Header Toolbar */}
         <header className="h-14 bg-slate-900 border-b border-slate-700 flex items-center justify-between px-4 shadow-sm z-10 flex-shrink-0">
           <div className="flex items-center gap-4">
-             <button 
-                onClick={selectedCategory ? handleBackToCategoryList : handleBackToDashboard} 
+             <button
+                onClick={selectedCategory ? handleBackToCategoryList : handleBackToDashboard}
                 className="text-slate-400 hover:text-white"
              >
                  <ArrowLeft className="w-5 h-5" />
              </button>
              <div className="h-6 w-px bg-slate-700 mx-2"></div>
              <h2 className="font-semibold text-slate-100">{currentExercise.title}</h2>
-             
+
              {isTimerActive && (
                  <div className="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded text-red-400 font-mono font-bold animate-pulse">
                      <Timer className="w-4 h-4" />
@@ -215,7 +215,7 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <button 
+            <button
               onClick={handleReset}
               className="p-2 text-slate-400 hover:text-white transition-colors"
               title="Reset Code"
@@ -227,8 +227,8 @@ const App: React.FC = () => {
               disabled={isRunning}
               className={`
                 flex items-center gap-2 px-4 py-1.5 rounded-md font-bold text-sm transition-all
-                ${isRunning 
-                  ? 'bg-slate-700 text-slate-400 cursor-wait' 
+                ${isRunning
+                  ? 'bg-slate-700 text-slate-400 cursor-wait'
                   : 'bg-green-600 hover:bg-green-500 text-white shadow-[0_0_15px_rgba(22,163,74,0.3)]'
                 }
               `}
@@ -241,7 +241,7 @@ const App: React.FC = () => {
 
         {/* Workspace Split */}
         <div className="flex-1 flex overflow-hidden">
-            
+
             {/* Middle: Code & Terminal */}
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden border-r border-slate-700">
                 {/* Editor Area (Top 65%) */}
@@ -253,20 +253,20 @@ const App: React.FC = () => {
                             This file is read-only
                         </div>
                     )}
-                    <CodeEditor 
-                        code={fileContents[activePath] || ""} 
-                        onChange={handleFileChange} 
+                    <CodeEditor
+                        code={fileContents[activePath] || ""}
+                        onChange={handleFileChange}
                         filename={activePath}
                     />
                 </div>
-                
+
                 {/* Terminal Area (Bottom 35%) */}
                 <div className="flex-1 min-h-[150px] border-t border-slate-700 relative overflow-hidden">
-                    <Terminal 
-                        output={output} 
-                        isRunning={isRunning} 
-                        passed={lastPassed} 
-                        onNext={handleNextExercise} 
+                    <Terminal
+                        output={output}
+                        isRunning={isRunning}
+                        passed={lastPassed}
+                        onNext={handleNextExercise}
                         nextLabel={queue.length > 0 ? "Next Exercise" : "Finish"}
                     />
                 </div>
