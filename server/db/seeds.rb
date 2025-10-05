@@ -1,5 +1,3 @@
-# db/seeds.rb
-
 puts "🌱 Seeding exercises..."
 
 Exercise.destroy_all

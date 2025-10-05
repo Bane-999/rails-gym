@@ -13,7 +13,7 @@ Bundler.require(*Rails.groups)
 
 module RailsGymSandbox
   class Application < Rails::Application
-    config.load_defaults 7.1
+    config.load_defaults 8.0
 
     # API mode — no views, no asset pipeline, no cookies
     # Still allows controllers and routing
@@ -27,5 +27,7 @@ module RailsGymSandbox
     config.log_level = :warn
     config.logger    = Logger.new($stdout)
     config.logger.level = Logger::WARN
+
+    config.active_support.to_time_preserves_timezone = :zone
   end
 end
