@@ -9,5 +9,23 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.order = :random
-  config.warnings = true
+  config.warnings = false
+end
+
+module Warning
+  class << self
+    alias_method :original_warn, :warn
+
+    BLOCKED = [
+      "mail/parsers",
+      "statement not reached"
+    ]
+
+    def warn(message, category: nil, **kwargs)
+      msg = message.to_s
+      return if BLOCKED.any? { |b| msg.include?(b) }
+
+      original_warn(message, category: category, **kwargs)
+    end
+  end
 end
