@@ -7,7 +7,15 @@ require "rspec/rails"
 require "shoulda/matchers"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-ActiveRecord::Migration.maintain_test_schema!
+
+# Skip maintaining test schema if there are pending migrations
+# (user-submitted migrations will be run fresh by individual tests)
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError
+  # Pending migrations are expected when testing migration exercises
+  # Tests will manage their own migration state via reset_schema!
+end
 
 RSpec.configure do |config|
   config.fixture_paths = [Rails.root.join("spec/fixtures")]
