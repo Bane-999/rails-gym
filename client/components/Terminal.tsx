@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Terminal as TerminalIcon, CheckCircle, XCircle, Loader2, ArrowRight } from 'lucide-react';
+import { stripAnsiCodes } from '../utils/ansiClean';
+import LoadingAnimation from './LoadingAnimation';
 
 interface TerminalProps {
   output: string;
@@ -35,12 +37,16 @@ const Terminal: React.FC<TerminalProps> = ({ output, isRunning, passed, onNext, 
       </div>
 
       {/* Output Content */}
-      <div 
-        ref={scrollRef}
-        className="flex-1 overflow-auto p-4 whitespace-pre-wrap font-mono leading-relaxed pb-32"
-      >
-        {output ? output : <span className="text-slate-600 italic">Ready to run... press "Run Code" to start.</span>}
-      </div>
+      {isRunning ? (
+        <LoadingAnimation />
+      ) : (
+        <div
+          ref={scrollRef}
+          className="flex-1 overflow-auto p-4 whitespace-pre-wrap font-mono leading-relaxed"
+        >
+          {output ? stripAnsiCodes(output) : <span className="text-slate-600 italic">Ready to run... press "Run Code" to start.</span>}
+        </div>
+      )}
 
       {/* Modern "Flash" Floating Overlay */}
       {!isRunning && passed !== null && (
@@ -62,7 +68,7 @@ const Terminal: React.FC<TerminalProps> = ({ output, isRunning, passed, onNext, 
                 `}>
                     <div className="flex items-center gap-5">
                         <div className={`
-                            relative flex items-center justify-center w-12 h-12 rounded-full border 
+                            relative flex items-center justify-center w-12 h-12 rounded-full border
                             ${passed ? 'bg-green-500/10 border-green-500/50 text-green-400' : 'bg-red-500/10 border-red-500/50 text-red-400'}
                         `}>
                             {passed ? <CheckCircle className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
@@ -80,7 +86,7 @@ const Terminal: React.FC<TerminalProps> = ({ output, isRunning, passed, onNext, 
                     </div>
 
                     {passed && onNext && (
-                    <button 
+                    <button
                         onClick={onNext}
                         className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white bg-green-600 hover:bg-green-500 border-t border-white/20 shadow-lg shadow-green-900/40 hover:scale-105 hover:shadow-green-900/60 transition-all active:scale-95"
                     >
