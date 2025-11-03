@@ -1,5 +1,5 @@
 export type Category = 'Migration' | 'Validation' | 'ActiveRecord' | 'Associations';
-export type Difficulty = 'Easy' | 'Medium' | 'Hard';
+export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
 
 export interface FileNode {
   name: string; // Display name (e.g. "user.rb")
@@ -11,14 +11,13 @@ export interface Exercise {
   id: string;
   exercise_id: string; // Unique identifier for the exercise (e.g. "001_user_validation")
   title: string;
-  category: Category;
+  category: string;
   difficulty: Difficulty;
   description: string;
 
   // State management for multiple files
   defaultOpenPath: string; // Full path e.g. "app/models/user.rb"
   files: Record<string, string>; // Initial content: { "app/models/user.rb": "..." }
-  readOnlyPaths: string[]; // Paths that cannot be edited e.g. ["spec/models/user_spec.rb"]
 
   hint: string;
   fileTree: FileNode[]; // Visual structure

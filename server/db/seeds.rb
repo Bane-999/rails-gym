@@ -9,7 +9,9 @@ Exercise.create!(
   exercise_id: "001_user_validation",
   title:       "Validate Presence of Email",
   difficulty:  "beginner",
-  category:    "validations",
+  category:    "Validation",
+  default_open_path: "app/models/user.rb",
+  hint: "Use `validates :attribute, presence: true`.",
 
   description: <<~TEXT.strip,
     The User model requires an email address to be valid.
@@ -59,7 +61,9 @@ Exercise.create!(
   exercise_id: "002_add_age_to_users",
   title:       "Migration: Add Age Column",
   difficulty:  "beginner",
-  category:    "migrations",
+  category:    "Migration",
+  default_open_path: "db/migrate/20240320120000_add_age_to_users.rb",
+  hint: "Use `add_column :table_name, :column_name, :type`.",
 
   description: <<~TEXT.strip,
     We need to store the age of our users.
@@ -88,12 +92,16 @@ Exercise.create!(
   MARKDOWN
 
   starter_code: {
-    "db/migrate/20240320120000_add_age_to_users.rb" => <<~RUBY
+    "db/migrate/20240320120000_add_age_to_users.rb" => <<~RUBY,
       class AddAgeToUsers < ActiveRecord::Migration[8.0]
         def change
           # TODO: Add column here
 
         end
+      end
+    RUBY
+    "app/models/user.rb" => <<~RUBY
+      class User < ApplicationRecord
       end
     RUBY
   }
@@ -107,7 +115,9 @@ Exercise.create!(
   exercise_id: "003_find_admins",
   title:       "ActiveRecord: Find Admins",
   difficulty:  "intermediate",
-  category:    "activerecord",
+  category:    "ActiveRecord",
+  default_open_path: "app/services/user_finder.rb",
+  hint: "Use `User.where(condition)`.",
 
   description: <<~TEXT.strip,
     We need a way to find all users who are administrators.
@@ -137,12 +147,16 @@ Exercise.create!(
   MARKDOWN
 
   starter_code: {
-    "app/services/user_finder.rb" => <<~RUBY
+    "app/services/user_finder.rb" => <<~RUBY,
       class UserFinder
         def self.admins
           # TODO: Return ActiveRecord relation for admins
           User.none
         end
+      end
+    RUBY
+    "app/models/user.rb" => <<~RUBY
+      class User < ApplicationRecord
       end
     RUBY
   }
@@ -156,7 +170,9 @@ Exercise.create!(
   exercise_id: "004_user_posts_association",
   title:       "Associations: User has many Posts",
   difficulty:  "intermediate",
-  category:    "associations",
+  category:    "Associations",
+  default_open_path: "app/models/user.rb",
+  hint: "Use `has_many` in User and `belongs_to` in Post.",
 
   description: <<~TEXT.strip,
     A user can have multiple posts, and a post belongs to a single user.

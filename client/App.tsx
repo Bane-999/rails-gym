@@ -1,13 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Play, RotateCw, ArrowLeft, Timer, Lock } from 'lucide-react';
+import { Play, RotateCw, ArrowLeft, Timer } from 'lucide-react';
 import CodeEditor from './components/Editor';
 import Terminal from './components/Terminal';
 import InstructionPanel from './components/InstructionPanel';
 import FileTree from './components/FileTree';
 import Dashboard from './components/Dashboard';
 import CategoryDetail from './components/CategoryDetail';
-import { EXERCISES } from './constants';
-import { executeCode } from './services/railsService';
+import { fetchExercises, executeCode } from './services/railsService';
 import { Exercise, Category } from './types';
 
 type ViewState = 'dashboard' | 'category_list' | 'workspace';
@@ -16,6 +15,8 @@ const App: React.FC = () => {
   const [view, setView] = useState<ViewState>('dashboard');
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [isLoadingExercises, setIsLoadingExercises] = useState(true);
 
   // Workspace State
   const [activePath, setActivePath] = useState<string>("");
@@ -29,6 +30,17 @@ const App: React.FC = () => {
   const [queue, setQueue] = useState<Exercise[]>([]);
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
   const [isTimerActive, setIsTimerActive] = useState(false);
+
+  // Fetch exercises on mount
+  useEffect(() => {
+    const loadExercises = async () => {
+      setIsLoadingExercises(true);
+      const data = await fetchExercises();
+      setExercises(data);
+      setIsLoadingExercises(false);
+    };
+    loadExercises();
+  }, []);
 
   // Timer Effect
   useEffect(() => {
@@ -73,7 +85,7 @@ const App: React.FC = () => {
 
   const handleSelectExerciseFromList = (ex: Exercise) => {
       // Find exercises in the same category to populate the queue
-      const categoryExercises = EXERCISES.filter(e => e.category === ex.category);
+      const categoryExercises = exercises.filter(e => e.category === ex.category);
       const currentIndex = categoryExercises.findIndex(e => e.id === ex.id);
       // Queue is everything after this one
       const remaining = categoryExercises.slice(currentIndex + 1);
@@ -84,7 +96,7 @@ const App: React.FC = () => {
 
   const handleStartCircuit = (minutes: number) => {
       // Pick random exercises
-      const shuffled = [...EXERCISES].sort(() => 0.5 - Math.random());
+      const shuffled = [...exercises].sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, 3); // Take 3 random ones
 
       setQueue(selected.slice(1));
@@ -134,7 +146,7 @@ const App: React.FC = () => {
       setOutput(result.output);
       setLastPassed(result.passed);
     } catch (error) {
-      setOutput("Error connecting to backend runner.");
+      setOutput("Error connecting to server runner.");
     } finally {
       setIsRunning(false);
     }
@@ -150,7 +162,6 @@ const App: React.FC = () => {
 
   const handleFileChange = (newContent: string | undefined) => {
       if (newContent === undefined) return;
-      if (currentExercise?.readOnlyPaths.includes(activePath)) return;
 
       setFileContents(prev => ({
           ...prev,
@@ -158,19 +169,17 @@ const App: React.FC = () => {
       }));
   };
 
-  const isCurrentFileReadOnly = currentExercise?.readOnlyPaths.includes(activePath);
-
   // View Routing
   if (view === 'dashboard') {
       return <Dashboard onStartCategory={handleStartCategory} onStartCircuit={handleStartCircuit} />;
   }
 
   if (view === 'category_list' && selectedCategory) {
-      const exercises = EXERCISES.filter(e => e.category === selectedCategory);
+      const categoryExercises = exercises.filter(e => e.category === selectedCategory);
       return (
           <CategoryDetail
             category={selectedCategory}
-            exercises={exercises}
+            exercises={categoryExercises}
             onSelect={handleSelectExerciseFromList}
             onBack={() => setView('dashboard')}
           />
@@ -246,13 +255,6 @@ const App: React.FC = () => {
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden border-r border-slate-700">
                 {/* Editor Area (Top 65%) */}
                 <div className="h-[65%] min-h-[200px] overflow-hidden flex flex-col">
-                    {/* Read Only Banner */}
-                    {isCurrentFileReadOnly && (
-                        <div className="bg-slate-800 text-slate-400 text-xs px-4 py-1 flex items-center justify-center border-b border-slate-700 gap-2">
-                            <Lock className="w-3 h-3" />
-                            This file is read-only
-                        </div>
-                    )}
                     <CodeEditor
                         code={fileContents[activePath] || ""}
                         onChange={handleFileChange}

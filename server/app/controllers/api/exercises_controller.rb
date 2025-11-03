@@ -1,21 +1,14 @@
 class Api::ExercisesController < ApplicationController
   def index
-    exercises = Exercise.ordered.select(
-      :id,
-      :exercise_id,
-      :title,
-      :description,
-      :difficulty,
-      :category
-    )
+    exercises = Exercise.ordered
 
-    render json: exercises, status: :ok
+    render json: format_exercises(exercises), status: :ok
   end
 
   def show
     exercise = Exercise.find_by!(exercise_id: params[:exercise_id])
 
-    render json: exercise, status: :ok
+    render json: format_exercise(exercise), status: :ok
 
   rescue ActiveRecord::RecordNotFound
     render json: {
@@ -62,8 +55,6 @@ class Api::ExercisesController < ApplicationController
       }, status: :bad_request
     end
 
-    files_hash = files.to_unsafe_h
-
     unless Exercise.exists?(exercise_id: exercise_id)
       return render json: {
         success: false,
@@ -71,8 +62,31 @@ class Api::ExercisesController < ApplicationController
       }, status: :not_found
     end
 
+    files_hash = files.to_unsafe_h
+
     result = CodeRunnerService.new(exercise_id, files_hash).run
 
     render json: result, status: :ok
+  end
+
+  private
+
+  def format_exercises(exercises)
+    exercises.map { |exercise| format_exercise(exercise) }
+  end
+
+  def format_exercise(exercise)
+    {
+      id: "ex_#{exercise.id}",
+      exercise_id: exercise.exercise_id,
+      title: exercise.title,
+      category: exercise.category,
+      difficulty: exercise.difficulty,
+      description: exercise.description,
+      defaultOpenPath: exercise.default_open_path,
+      files: exercise.starter_code,
+      fileTree: exercise.file_tree,
+      hint: exercise.hint
+    }
   end
 end

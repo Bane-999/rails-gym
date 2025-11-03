@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_06_07_103505) do
+ActiveRecord::Schema[8.0].define(version: 2026_06_11_150548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_07_103505) do
     t.jsonb "starter_code", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "default_open_path", default: "", null: false
+    t.text "hint", default: "", null: false
     t.index ["category"], name: "index_exercises_on_category"
     t.index ["difficulty"], name: "index_exercises_on_difficulty"
     t.index ["exercise_id"], name: "index_exercises_on_exercise_id", unique: true
