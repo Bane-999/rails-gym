@@ -1,24 +1,38 @@
-# README
+# Rails Gym — Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 8 API that orchestrates Docker execution of user-submitted code.
 
-Things you may want to cover:
+## Responsibilities
 
-* Ruby version
+- Store exercise metadata (title, description, starter code, instructions)
+- Receive user code submissions via `POST /api/exercises/run`
+- Write user files to `tmp/submissions/<exercise_id>/`
+- Trigger Docker sandbox container
+- Return RSpec results to frontend
 
-* System dependencies
+## Setup
 
-* Configuration
+```bash
+bundle install
+cp .env.example .env   # update credentials if needed
+rails db:create db:migrate db:seed
+rails server
+```
 
-* Database creation
+## API Endpoints
 
-* Database initialization
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/exercises` | List all exercises |
+| GET | `/api/exercises/:exercise_id` | Get single exercise |
+| POST | `/api/exercises/run` | Run user code in Docker |
 
-* How to run the test suite
+## Running Tests
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bundle exec rspec
+```
 
-* Deployment instructions
+## Environment Variables
 
-* ...
+See `.env.example` for required variables.
