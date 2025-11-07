@@ -20,7 +20,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_11_150548) do
     t.text "description", null: false
     t.string "difficulty", null: false
     t.string "category", null: false
-    t.text "instructions", null: false
     t.jsonb "starter_code", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

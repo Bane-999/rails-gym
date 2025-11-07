@@ -44,7 +44,7 @@ RSpec.describe "Api::Exercises", type: :request do
         )
 
         # These fields should NOT be present in list view (too heavy)
-        expect(exercise.keys).not_to include("starter_code", "instructions")
+        expect(exercise.keys).not_to include("starter_code")
       end
 
       it "returns JSON content type" do
@@ -78,7 +78,7 @@ RSpec.describe "Api::Exercises", type: :request do
         expect(body["title"]).to eq("Add Email Validation")
       end
 
-      it "returns full exercise fields including starter_code and instructions" do
+      it "returns full exercise fields including starter_code" do
         get "/api/exercises/001_user_validation"
         body = JSON.parse(response.body)
 
@@ -89,7 +89,6 @@ RSpec.describe "Api::Exercises", type: :request do
           "description",
           "difficulty",
           "category",
-          "instructions",
           "starter_code"
         )
       end

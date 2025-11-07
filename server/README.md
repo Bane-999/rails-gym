@@ -4,7 +4,7 @@ Rails 8 API that orchestrates Docker execution of user-submitted code.
 
 ## Responsibilities
 
-- Store exercise metadata (title, description, starter code, instructions)
+- Store exercise metadata (title, description, starter code)
 - Receive user code submissions via `POST /api/exercises/run`
 - Write user files to `tmp/submissions/<exercise_id>/`
 - Trigger Docker sandbox container

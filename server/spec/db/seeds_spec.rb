@@ -44,10 +44,6 @@ RSpec.describe "Database Seeds", type: :task do
     it "has the correct starter file path" do
       expect(exercise.starter_code.keys).to include("app/models/user.rb")
     end
-
-    it "has non-empty instructions" do
-      expect(exercise.instructions).to be_present
-    end
   end
 
   describe "002_add_age_to_users" do
@@ -67,10 +63,6 @@ RSpec.describe "Database Seeds", type: :task do
 
     it "has the correct starter file path" do
       expect(exercise.starter_code.keys.first).to include("add_age_to_users")
-    end
-
-    it "has non-empty instructions" do
-      expect(exercise.instructions).to be_present
     end
   end
 

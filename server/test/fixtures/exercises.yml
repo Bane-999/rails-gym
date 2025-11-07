@@ -6,8 +6,7 @@ one:
   description: MyText
   difficulty: MyString
   category: MyString
-  instructions: MyText
-  starter_code: 
+  starter_code:
 
 two:
   exercise_id: MyString
@@ -15,5 +14,4 @@ two:
   description: MyText
   difficulty: MyString
   category: MyString
-  instructions: MyText
-  starter_code: 
+  starter_code:

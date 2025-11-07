@@ -6,7 +6,6 @@ class CreateExercises < ActiveRecord::Migration[8.0]
       t.text :description,    null: false
       t.string :difficulty,   null: false
       t.string :category,     null: false
-      t.text :instructions,   null: false
       t.jsonb :starter_code,  null: false, default: {}
 
       t.timestamps

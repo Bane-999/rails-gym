@@ -21,10 +21,6 @@ RSpec.describe Exercise, type: :model do
       it { should validate_presence_of(:description) }
     end
 
-    describe "instructions" do
-      it { should validate_presence_of(:instructions) }
-    end
-
     describe "category" do
       it { should validate_presence_of(:category) }
     end

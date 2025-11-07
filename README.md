@@ -167,8 +167,7 @@ Exercise.create!(
   title:       "Your Exercise Title",
   difficulty:  "beginner",
   category:    "validations",
-  description: "Short description shown in list view.",
-  instructions: <<~MD,
+  description: <<~MD,
     ## Your Task
     ...
   MD

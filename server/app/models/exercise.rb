@@ -2,7 +2,6 @@ class Exercise < ApplicationRecord
   validates :exercise_id,   presence: true, uniqueness: true
   validates :title,         presence: true
   validates :description,   presence: true
-  validates :instructions,  presence: true
   validates :category,      presence: true
   validates :difficulty,    presence: true,
                             inclusion: {

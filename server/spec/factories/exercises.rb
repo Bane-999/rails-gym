@@ -3,7 +3,6 @@ FactoryBot.define do
     sequence(:exercise_id) { |n| "#{n.to_s.rjust(3, '0')}_exercise" }
     title        { Faker::Lorem.sentence(word_count: 4) }
     description  { Faker::Lorem.paragraph }
-    instructions { Faker::Lorem.paragraphs(number: 3).join("\n\n") }
     difficulty   { "beginner" }
     category     { "validations" }
     starter_code do
@@ -55,7 +54,6 @@ FactoryBot.define do
       difficulty   { "beginner" }
       category     { "validations" }
       description  { "Learn how to protect your database from bad data." }
-      instructions { "Add a presence validation for the email attribute." }
       starter_code do
         {
           "app/models/user.rb" => "class User < ApplicationRecord\n  # Add your validation here\n\nend\n"
@@ -69,7 +67,6 @@ FactoryBot.define do
       difficulty   { "beginner" }
       category     { "migrations" }
       description  { "Practice writing a Rails migration." }
-      instructions { "Add an email column to the users table." }
       starter_code do
         {
           "db/migrate/20240101000001_add_email_to_users.rb" =>
@@ -84,7 +81,6 @@ FactoryBot.define do
       difficulty   { "intermediate" }
       category     { "associations" }
       description  { "Set up a one-to-many relationship between User and Post." }
-      instructions { "Add has_many :posts to User and belongs_to :user to Post." }
       starter_code do
         {
           "app/models/user.rb" => "class User < ApplicationRecord\n  # Add your association here\n\nend\n",
