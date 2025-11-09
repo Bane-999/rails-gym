@@ -34,7 +34,7 @@ RSpec.describe "Database Seeds", type: :task do
     end
 
     it "has correct category" do
-      expect(exercise.category).to eq("validations")
+      expect(exercise.category).to eq("Validation")
     end
 
     it "has a single starter code file" do
@@ -58,7 +58,7 @@ RSpec.describe "Database Seeds", type: :task do
     end
 
     it "has correct category" do
-      expect(exercise.category).to eq("migrations")
+      expect(exercise.category).to eq("Migration")
     end
 
     it "has the correct starter file path" do
@@ -78,7 +78,7 @@ RSpec.describe "Database Seeds", type: :task do
     end
 
     it "has correct category" do
-      expect(exercise.category).to eq("activerecord")
+      expect(exercise.category).to eq("ActiveRecord")
     end
 
     it "has the correct starter file path" do
@@ -98,7 +98,7 @@ RSpec.describe "Database Seeds", type: :task do
     end
 
     it "has correct category" do
-      expect(exercise.category).to eq("associations")
+      expect(exercise.category).to eq("Associations")
     end
 
     it "has the correct starter file path" do

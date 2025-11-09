@@ -89,15 +89,15 @@ RSpec.describe "Api::Exercises", type: :request do
           "description",
           "difficulty",
           "category",
-          "starter_code"
+          "files"
         )
       end
 
-      it "returns starter_code as a hash" do
+      it "returns files as a hash" do
         get "/api/exercises/001_user_validation"
         body = JSON.parse(response.body)
-        expect(body["starter_code"]).to be_a(Hash)
-        expect(body["starter_code"].keys).to include("app/models/user.rb")
+        expect(body["files"]).to be_a(Hash)
+        expect(body["files"].keys).to include("app/models/user.rb")
       end
 
       it "returns JSON content type" do

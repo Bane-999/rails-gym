@@ -122,7 +122,7 @@ RSpec.describe CodeRunnerService do
     end
 
     it "mounts the submission directory as /app/user_code" do
-      expect(command).to include("-v #{submission_dir}:/app/user_code")
+      expect(command).to include("-v '#{submission_dir}':/app/user_code")
     end
 
     it "passes exercise_id as environment variable" do
