@@ -1,0 +1,5 @@
+{
+  "success": true,
+  "output": "\n🏋️  Rails Gym Sandbox\n────────────────────────\n📋 Exercise: 001_user_validation\n\n📦 Copying user code...\n   ✅ app/models/user.rb\n\n🗄️  Loading database...\n   ✅ DB ready\n\n🧪 Running tests...\n────────────────────────\n\nUser\n  email presence validation\n    when email is nil\n      is not valid\n      has an error on :email\n    when email is present\n      is valid\n\n7 examples, 0 failures\n\n✅ All specs passed\n",
+  "message": "All tests passed! Great work 💪"
+}

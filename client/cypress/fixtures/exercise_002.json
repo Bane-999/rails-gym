@@ -1,0 +1,29 @@
+{
+  "id": 2,
+  "exercise_id": "002_add_age_to_users",
+  "title": "Migration: Add Age Column",
+  "difficulty": "beginner",
+  "category": "Migration",
+  "description": "We need to store the age of our users.",
+  "instructions": "## Your Task\n\nAdd an integer column named `age` to the `users` table.\n\n## Hints\n\nUse `add_column :table_name, :column_name, :type`",
+  "defaultOpenPath": "db/migrate/20240320120000_add_age_to_users.rb",
+  "files": {
+    "db/migrate/20240320120000_add_age_to_users.rb": "class AddAgeToUsers < ActiveRecord::Migration[8.0]\n  def change\n    # TODO: Add column here\n\n  end\nend\n"
+  },
+  "hint": "Use `add_column :table_name, :column_name, :type`",
+  "fileTree": [
+    {
+      "name": "db",
+      "isFolder": true,
+      "children": [
+        {
+          "name": "migrate",
+          "isFolder": true,
+          "children": [
+            { "name": "20240320120000_add_age_to_users.rb", "isFolder": false }
+          ]
+        }
+      ]
+    }
+  ]
+}

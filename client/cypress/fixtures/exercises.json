@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "exercise_id": "001_user_validation",
+    "title": "Validate Presence of Email",
+    "difficulty": "beginner",
+    "category": "Validation",
+    "description": "The User model requires an email address to be valid.",
+    "defaultOpenPath": "app/models/user.rb",
+    "files": {
+      "app/models/user.rb": "class User < ApplicationRecord\n  # TODO: Add validation here\n\nend\n"
+    },
+    "hint": "Use `validates :attribute, presence: true`",
+    "fileTree": [
+      {
+        "name": "app",
+        "isFolder": true,
+        "children": [
+          {
+            "name": "models",
+            "isFolder": true,
+            "children": [
+              { "name": "user.rb", "isFolder": false }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "exercise_id": "002_add_age_to_users",
+    "title": "Migration: Add Age Column",
+    "difficulty": "beginner",
+    "category": "Migration",
+    "description": "We need to store the age of our users.",
+    "defaultOpenPath": "db/migrate/20240320120000_add_age_to_users.rb",
+    "files": {
+      "db/migrate/20240320120000_add_age_to_users.rb": "class AddAgeToUsers < ActiveRecord::Migration[8.0]\n  def change\n    # TODO: Add column here\n\n  end\nend\n"
+    },
+    "hint": "Use `add_column :table_name, :column_name, :type`",
+    "fileTree": [
+      {
+        "name": "db",
+        "isFolder": true,
+        "children": [
+          {
+            "name": "migrate",
+            "isFolder": true,
+            "children": [
+              { "name": "20240320120000_add_age_to_users.rb", "isFolder": false }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "exercise_id": "003_find_admins",
+    "title": "ActiveRecord: Find Admins",
+    "difficulty": "intermediate",
+    "category": "ActiveRecord",
+    "description": "We need a way to find all users who are administrators.",
+    "defaultOpenPath": "app/services/user_finder.rb",
+    "files": {
+      "app/services/user_finder.rb": "class UserFinder\n  def self.admins\n    # TODO: Return ActiveRecord relation for admins\n    User.none\n  end\nend\n"
+    },
+    "hint": "Use `User.where(condition)`",
+    "fileTree": [
+      {
+        "name": "app",
+        "isFolder": true,
+        "children": [
+          {
+            "name": "services",
+            "isFolder": true,
+            "children": [
+              { "name": "user_finder.rb", "isFolder": false }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "exercise_id": "004_user_posts_association",
+    "title": "Associations: User has many Posts",
+    "difficulty": "intermediate",
+    "category": "Associations",
+    "description": "A user can have multiple posts, and a post belongs to a single user.",
+    "defaultOpenPath": "app/models/user.rb",
+    "files": {
+      "app/models/user.rb": "class User < ApplicationRecord\n  # TODO: Add association to posts\nend\n",
+      "app/models/post.rb": "class Post < ApplicationRecord\n  # TODO: Add association to user\nend\n"
+    },
+    "hint": "Use `has_many` in User and `belongs_to` in Post",
+    "fileTree": [
+      {
+        "name": "app",
+        "isFolder": true,
+        "children": [
+          {
+            "name": "models",
+            "isFolder": true,
+            "children": [
+              { "name": "user.rb", "isFolder": false },
+              { "name": "post.rb", "isFolder": false }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

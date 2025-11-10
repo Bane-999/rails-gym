@@ -1,0 +1,29 @@
+{
+  "id": 3,
+  "exercise_id": "003_find_admins",
+  "title": "ActiveRecord: Find Admins",
+  "difficulty": "intermediate",
+  "category": "ActiveRecord",
+  "description": "We need a way to find all users who are administrators.",
+  "instructions": "## Your Task\n\nImplement the `admins` class method to return all users where `admin` is true.\n\n## Hints\n\nUse `User.where(condition)`",
+  "defaultOpenPath": "app/services/user_finder.rb",
+  "files": {
+    "app/services/user_finder.rb": "class UserFinder\n  def self.admins\n    # TODO: Return ActiveRecord relation for admins\n    User.none\n  end\nend\n"
+  },
+  "hint": "Use `User.where(condition)`",
+  "fileTree": [
+    {
+      "name": "app",
+      "isFolder": true,
+      "children": [
+        {
+          "name": "services",
+          "isFolder": true,
+          "children": [
+            { "name": "user_finder.rb", "isFolder": false }
+          ]
+        }
+      ]
+    }
+  ]
+}

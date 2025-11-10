@@ -233,6 +233,7 @@ const App: React.FC = () => {
             </button>
             <button
               onClick={handleRunCode}
+              data-cy="run-code-btn"
               disabled={isRunning}
               className={`
                 flex items-center gap-2 px-4 py-1.5 rounded-md font-bold text-sm transition-all

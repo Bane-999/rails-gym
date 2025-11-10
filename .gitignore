@@ -58,3 +58,5 @@ Thumbs.db
 .byebug_history
 
 .rspec_status
+
+/cliend/cypress/screenshots/

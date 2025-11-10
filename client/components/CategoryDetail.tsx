@@ -23,8 +23,9 @@ const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, exercises, on
     <div className="h-full flex flex-col">
       {/* Header */}
       <div className="px-12 py-10 border-b border-white/5 flex items-center gap-6 bg-slate-900/20 backdrop-blur-sm sticky top-0 z-10">
-         <button 
+         <button
            onClick={onBack}
+           data-cy="back-button"
            className="p-3 hover:bg-white/5 rounded-xl text-slate-400 hover:text-white transition-all border border-transparent hover:border-white/5"
          >
             <ArrowLeft className="w-5 h-5" />
@@ -48,13 +49,14 @@ const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, exercises, on
                 </div>
             ) : (
                 exercises.map((ex, index) => (
-                    <button 
+                    <button
                         key={ex.id}
                         onClick={() => onSelect(ex)}
+                        data-cy={`exercise-${ex.exercise_id}`}
                         className="group flex items-center justify-between p-5 bg-slate-800/20 border border-white/5 rounded-xl hover:bg-slate-800/50 hover:border-white/10 transition-all duration-200 text-left relative overflow-hidden"
                     >
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        
+
                         <div className="flex items-center gap-5">
                             <div className="w-10 h-10 rounded-lg bg-slate-900 border border-white/5 flex items-center justify-center text-slate-500 font-mono text-sm group-hover:text-white transition-colors">
                                 {(index + 1).toString().padStart(2, '0')}
@@ -63,9 +65,9 @@ const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, exercises, on
                                 <h3 className="font-semibold text-lg text-slate-200 group-hover:text-white mb-1.5">{ex.title}</h3>
                                 <div className="flex items-center gap-3 text-xs">
                                     <span className={`px-2 py-0.5 rounded-full bg-slate-900 border border-white/5 font-medium
-                                        ${ex.difficulty === 'Easy' ? 'text-green-400' : ''}
-                                        ${ex.difficulty === 'Medium' ? 'text-yellow-400' : ''}
-                                        ${ex.difficulty === 'Hard' ? 'text-red-400' : ''}
+                                        ${ex.difficulty === 'beginner' ? 'text-green-400' : ''}
+                                        ${ex.difficulty === 'intermediate' ? 'text-yellow-400' : ''}
+                                        ${ex.difficulty === 'advanced' ? 'text-red-400' : ''}
                                     `}>
                                         {ex.difficulty}
                                     </span>

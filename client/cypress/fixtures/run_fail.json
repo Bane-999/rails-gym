@@ -1,0 +1,5 @@
+{
+  "success": false,
+  "output": "\n🏋️  Rails Gym Sandbox\n────────────────────────\n📋 Exercise: 001_user_validation\n\nUser\n  email presence validation\n    when email is nil\n      is not valid (FAILED - 1)\n\nFailures:\n\n  1) User email presence validation when email is nil is not valid\n     Failure/Error: expect(user).not_to be_valid\n       expected #<User> to be invalid\n\n7 examples, 7 failures\n\n❌ Tests failed\n",
+  "message": "7 examples, 7 failures"
+}

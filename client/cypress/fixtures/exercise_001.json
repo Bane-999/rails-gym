@@ -1,0 +1,29 @@
+{
+  "id": 1,
+  "exercise_id": "001_user_validation",
+  "title": "Validate Presence of Email",
+  "difficulty": "beginner",
+  "category": "Validation",
+  "description": "The User model requires an email address to be valid.",
+  "instructions": "## Your Task\n\nAdd a presence validation for the email attribute.\n\n## Hints\n\nUse `validates :attribute, presence: true`",
+  "defaultOpenPath": "app/models/user.rb",
+  "files": {
+    "app/models/user.rb": "class User < ApplicationRecord\n  # TODO: Add validation here\n\nend\n"
+  },
+  "hint": "Use `validates :attribute, presence: true`",
+  "fileTree": [
+    {
+      "name": "app",
+      "isFolder": true,
+      "children": [
+        {
+          "name": "models",
+          "isFolder": true,
+          "children": [
+            { "name": "user.rb", "isFolder": false }
+          ]
+        }
+      ]
+    }
+  ]
+}

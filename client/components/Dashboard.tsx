@@ -103,6 +103,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onStartCategory, onStartCircuit }
                         {CATEGORIES.map((cat, idx) => (
                             <button
                                 key={cat.id}
+                                data-cy={`category-${cat.id}`}
                                 onClick={() => onStartCategory(cat.id as Category)}
                                 className="group text-left p-6 rounded-2xl bg-slate-800/20 border border-white/5 hover:bg-slate-800/40 hover:border-white/10 transition-all duration-300 relative overflow-hidden"
                                 style={{animationDelay: `${idx * 0.05}s`}}

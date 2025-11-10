@@ -1,0 +1,13 @@
+{
+  "id": 4,
+  "exercise_id": "004_user_posts_association",
+  "title": "Associations: User has many Posts",
+  "difficulty": "intermediate",
+  "category": "Associations",
+  "description": "A user can have multiple posts, and a post belongs to a single user.",
+  "instructions": "## Your Task\n\nAdd `has_many :posts` to the User model and `belongs_to :user` to the Post model.\n\n## Hints\n\nUse `has_many` in User and `belongs_to` in Post",
+  "starter_code": {
+    "app/models/user.rb": "class User < ApplicationRecord\n  # TODO: Add association to posts\nend\n",
+    "app/models/post.rb": "class Post < ApplicationRecord\n  # TODO: Add association to user\nend\n"
+  }
+}
