@@ -16,7 +16,6 @@ const App: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
   const [exercises, setExercises] = useState<Exercise[]>([]);
-  const [isLoadingExercises, setIsLoadingExercises] = useState(true);
 
   // Workspace State
   const [activePath, setActivePath] = useState<string>("");
@@ -34,10 +33,8 @@ const App: React.FC = () => {
   // Fetch exercises on mount
   useEffect(() => {
     const loadExercises = async () => {
-      setIsLoadingExercises(true);
       const data = await fetchExercises();
       setExercises(data);
-      setIsLoadingExercises(false);
     };
     loadExercises();
   }, []);
@@ -145,8 +142,12 @@ const App: React.FC = () => {
       const result = await executeCode(currentExercise.exercise_id, fileContents);
       setOutput(result.output);
       setLastPassed(result.passed);
-    } catch (error) {
-      setOutput("Error connecting to server runner.");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setOutput(error.message);
+      } else {
+        setOutput("Error connecting to server runner.");
+      }
     } finally {
       setIsRunning(false);
     }

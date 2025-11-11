@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-namespace */
+
 Cypress.Commands.add('stubApi', () => {
   // Always stub the list endpoint — called on every page load
   cy.intercept('GET', '**/api/exercises', {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, HelpCircle, Eye, EyeOff } from 'lucide-react';
+import { BookOpen, HelpCircle } from 'lucide-react';
 import { Exercise } from '../types';
 
 interface InstructionPanelProps {
@@ -8,11 +8,6 @@ interface InstructionPanelProps {
 
 const InstructionPanel: React.FC<InstructionPanelProps> = ({ exercise }) => {
   const [showHint, setShowHint] = useState(false);
-
-  // Reset hint state when exercise changes
-  React.useEffect(() => {
-    setShowHint(false);
-  }, [exercise.id]);
 
   const renderMarkdown = (text: string) => {
     return text.split('\n').map((line, i) => {
@@ -23,9 +18,9 @@ const InstructionPanel: React.FC<InstructionPanelProps> = ({ exercise }) => {
       const parts = line.split(/(`[^`]+`)/);
       return (
         <p key={i} className="mb-2 text-slate-300 leading-relaxed">
-          {parts.map((part, j) => 
-            part.startsWith('`') && part.endsWith('`') 
-              ? <code key={j} className="bg-slate-800 text-red-300 px-1 py-0.5 rounded text-sm font-mono">{part.slice(1, -1)}</code> 
+          {parts.map((part, j) =>
+            part.startsWith('`') && part.endsWith('`')
+              ? <code key={j} className="bg-slate-800 text-red-300 px-1 py-0.5 rounded text-sm font-mono">{part.slice(1, -1)}</code>
               : part
           )}
         </p>
@@ -50,14 +45,14 @@ const InstructionPanel: React.FC<InstructionPanelProps> = ({ exercise }) => {
 
       <div className="p-4 border-t border-slate-700 bg-slate-900/50">
         <div className="flex flex-col gap-2">
-            <button 
+            <button
                 onClick={() => setShowHint(!showHint)}
                 className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors uppercase tracking-wider mb-2"
             >
                 <HelpCircle className="w-4 h-4" />
                 {showHint ? 'Hide Hint' : 'Need a Hint?'}
             </button>
-            
+
             {showHint && (
                 <div className="p-3 bg-yellow-900/20 border border-yellow-700/50 rounded text-yellow-200 text-sm italic animate-in slide-in-from-bottom-2 duration-200">
                    💡 {exercise.hint}
