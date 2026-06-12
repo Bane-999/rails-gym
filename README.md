@@ -30,6 +30,8 @@ Every exercise gives you:
 - A task description with requirements
 - A "Run Code" button that executes your code against hidden RSpec tests
 - Immediate pass/fail feedback with full RSpec output
+- 
+![Rails Gym Exercise](Screenshot02.png)
 
 ---
 
